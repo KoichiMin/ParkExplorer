@@ -26,34 +26,41 @@ window.onload = () =>{
 
 // adjust text inside the select type button
 const changeBtnText = () =>{
-  const dropdownType = document.querySelectorAll(".selectedType");
-  dropdownType.forEach(function(item) {
-    item.addEventListener("click", () => {
-        selectType.textContent = item.textContent;
-        if(item.textContent === "Location"){
-          // user selected Location as type
-          addDropdown.style.display = "none";
-          selectedTypeOption = locationsArray;
-          displayDropdownSearchBar(locationsArray);
-        } else{
-          // user selected Park as type
-          addDropdown.style.display = "none";
-          selectedTypeOption = parkTypesArray;
-          displayDropdownSearchBar(parkTypesArray);
-        }
-      });
+  const dropdownType = document.querySelectorAll(".selectedTypeBtn");
+  dropdownType.forEach((item) =>{
+      clickEventListener(item);
+
     });
-    
   }
+
+//Event Listener that finds out what the user clicked between Location, Park or Select All and adds dropdown 
+const clickEventListener = (item) =>{
+  item.addEventListener("click", () => {
+    selectType.textContent = item.textContent;
+    if(item.textContent === "Location"){
+      // user selected Location as type
+      addDropdown.style.display = "none";
+      selectedTypeOption = locationsArray;
+      displayDropdownSearchBar(locationsArray);
+    } else if(item.textContent === "Select All"){
+        // user selected Select All
+        displayDropdownSearchBar(locationsArray.concat(parkTypesArray, "Select All"))
+    }
+    else {
+      // user selected Park as type
+      addDropdown.style.display = "none";
+      selectedTypeOption = parkTypesArray;
+      displayDropdownSearchBar(parkTypesArray);
+    }
+  });
+}
+
   
-  // remove old anchor tags and create a dropdown for the searchBar
-  const displayDropdownSearchBar = (selectedTypeOption) =>{
+// remove old anchor tags and create a dropdown for the searchBar
+const displayDropdownSearchBar = (selectedTypeOption) =>{
     
     removeAnchorTags();
     createAllAnchorTags(selectedTypeOption);
-
-    console.log(selectedTypeOption)
-
 }
 
 // remove all a tags from addDropdown div
@@ -65,9 +72,15 @@ const removeAnchorTags = () =>{
 
 }
 
-//  creates all the anchor tags --> anchor click event listener 
+//  loop through array and create anchor tags 
 const createAllAnchorTags = (selectedTypeOption) =>{
   selectedTypeOption.forEach((parkTypeOrLocation) =>{
+      createSingleAnchorTag(parkTypeOrLocation)
+  });
+}
+
+// create a single anchor tag with click event listener
+const createSingleAnchorTag = (parkTypeOrLocation) =>{
     const a = document.createElement("a");
     a.className = "dropdown-item selectedType";
     a.textContent = parkTypeOrLocation;
@@ -76,7 +89,6 @@ const createAllAnchorTags = (selectedTypeOption) =>{
       changeInputField(parkTypeOrLocation);
     }
     addDropdown.appendChild(a);
-  });
 }
 
 // change input value once user clicks on anchor tag inside searchBar
@@ -118,42 +130,59 @@ const  filterFunction = () => {
 
 
 
+const cardContainer = document.getElementById("cardContainer");
+
 // figure out first if its a park type or location and loop through nationalPark Array to create cards
 const displayCards = (parkTypeOrLocation) =>{
-    console.log("it went here")
-    const cardContainer = document.getElementById("cardContainer");
-    const numberOfCards = cardContainer.childElementCount;
-    console.log(numberOfCards)
-    if(numberOfCards > 0){
-      console.log("went to delete")
+    
+  // remove old anchor tags 
       removeDiv()
-    }
-  
+    
+
+  // if parameter is inside the park type array
     if( parkTypesArray.includes(parkTypeOrLocation)){
-      console.log("it went inside if statement")
       nationalParksArray.forEach((element) =>{
         if(element.LocationName.includes(parkTypeOrLocation)){
-          console.log("it went in forEach")
           createCard(element)
         }
       })
-    } else{
-      console.log("it went inside if statement")
+    } else if(parkTypeOrLocation === "Select All"){
+        nationalParksArray.forEach((element) =>{
+          createCard(element)
+        })
+    }
+    else{
       nationalParksArray.forEach((element) =>{
         if(element.State === parkTypeOrLocation){
-          console.log("it went in forEach")
+    
           createCard(element)
         }
       })
     }
+
+    // style Container if needed
+    styleCardsContainer()
+  }
+  
+  // style the Container if number of cards display is more than 5
+  const styleCardsContainer = () =>{
+  let numberOfCards = cardContainer.childElementCount;
+  if(numberOfCards > 5){
+    cardContainer.style.overflowY = "scroll";
+    cardContainer.style.border = "1px solid black";
+  } else{
+    cardContainer.style.overflowY = "";
+    cardContainer.style.border = "none";
+  }
 }
 
 
-const cardContainer = document.getElementById("cardContainer");
+// create a single anchor tag
 const createCard = (locationObject) =>{
+
     const container = document.createElement("div");
     container.classList = "card container p-0 singleCard";
-
+    
     const cardHeader = document.createElement("div");
     cardHeader.classList = "card-header";
     cardHeader.innerText = locationObject.LocationID.toUpperCase();
@@ -183,11 +212,14 @@ const createCard = (locationObject) =>{
 }
 
 
+// remove all anchor tags
 const removeDiv = () => {
+  let numberOfCards = cardContainer.childElementCount;
+  if(numberOfCards > 0){
     const anchorsToRemove = cardContainer.querySelectorAll(".singleCard")
     console.log(anchorsToRemove)
     anchorsToRemove.forEach((anchor) => {
       anchor.remove();
   });
-
+}
 }

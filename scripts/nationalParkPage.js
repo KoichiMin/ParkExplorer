@@ -7,15 +7,15 @@ const input = document.getElementById("input");
 let selectedTypeOption = [];
 
 window.onload = () =>{
+  displayCards("Select All");
   selectType.onclick = (e) =>{
     e.preventDefault();
     selectedTypeOption = [];
     changeBtnText();
 
   }
-
+  // filter the dropdown when user types in the inputfield
   input.onkeyup = filterFunction;
-  
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -32,6 +32,7 @@ const changeBtnText = () =>{
 
     });
   }
+
 
 //Event Listener that finds out what the user clicked between Location, Park or Select All and adds dropdown 
 const clickEventListener = (item) =>{
@@ -63,6 +64,7 @@ const displayDropdownSearchBar = (selectedTypeOption) =>{
     createAllAnchorTags(selectedTypeOption);
 }
 
+
 // remove all a tags from addDropdown div
 const removeAnchorTags = () =>{
   const anchorsToRemove = addDropdown.querySelectorAll("a.selectedType");
@@ -72,12 +74,14 @@ const removeAnchorTags = () =>{
 
 }
 
+
 //  loop through array and create anchor tags 
 const createAllAnchorTags = (selectedTypeOption) =>{
   selectedTypeOption.forEach((parkTypeOrLocation) =>{
       createSingleAnchorTag(parkTypeOrLocation)
   });
 }
+
 
 // create a single anchor tag with click event listener
 const createSingleAnchorTag = (parkTypeOrLocation) =>{
@@ -91,13 +95,13 @@ const createSingleAnchorTag = (parkTypeOrLocation) =>{
     addDropdown.appendChild(a);
 }
 
+
 // change input value once user clicks on anchor tag inside searchBar
 const changeInputField = (parkTypeOrLocation) =>{
     input.value = parkTypeOrLocation
     addDropdown.style.display = "none";
     displayCards(parkTypeOrLocation)
 }
-
 
 
 // adjust dropdown for searchBar whenever user types in inputfield
@@ -163,6 +167,7 @@ const displayCards = (parkTypeOrLocation) =>{
     // style Container if needed
     styleCardsContainer()
   }
+  
   
   // style the Container if number of cards display is more than 5
   const styleCardsContainer = () =>{

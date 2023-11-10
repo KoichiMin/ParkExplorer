@@ -3,11 +3,14 @@
 const selectType = document.getElementById("selectType");
 const addDropdown = document.getElementById("addDropdown");
 const input = document.getElementById("input");
+const mainTitle = document.getElementById("main-title")
+
 // find out what user selected between Park or Location
 let selectedTypeOption = [];
 
 window.onload = () =>{
   displayCards("Select All");
+  input.value = "";
   selectType.onclick = (e) =>{
     e.preventDefault();
     selectedTypeOption = [];
@@ -15,14 +18,26 @@ window.onload = () =>{
 
   }
   // filter the dropdown when user types in the inputfield
-  input.onkeyup = filterFunction;
+  input.onkeyup = (e) =>{
+    if(e.key === "Enter"){
+      displayCards(input.value)
+      addDropdown.style.display = "none";
+      input.value = "";
+    } else{
+      filterFunction();
+    }
+  }
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
 // SEARCH BAR FUNCTIONS
 
 //////////////////////////////////////////////////////////////////////////////
+
+
 
 // adjust text inside the select type button
 const changeBtnText = () =>{
@@ -42,15 +57,18 @@ const clickEventListener = (item) =>{
       // user selected Location as type
       addDropdown.style.display = "none";
       selectedTypeOption = locationsArray;
+      input.placeholder = "Search Any State"
       displayDropdownSearchBar(locationsArray);
     } else if(item.textContent === "Select All"){
         // user selected Select All
+        input.placeholder = "Search anything"
         displayDropdownSearchBar(locationsArray.concat(parkTypesArray, "Select All"))
     }
     else {
       // user selected Park as type
       addDropdown.style.display = "none";
       selectedTypeOption = parkTypesArray;
+      input.placeholder = "Search Parks"
       displayDropdownSearchBar(parkTypesArray);
     }
   });
@@ -65,7 +83,7 @@ const displayDropdownSearchBar = (selectedTypeOption) =>{
 }
 
 
-// remove all a tags from addDropdown div
+// remove all anchor tags from addDropdown div
 const removeAnchorTags = () =>{
   const anchorsToRemove = addDropdown.querySelectorAll("a.selectedType");
   anchorsToRemove.forEach((anchor) => {
@@ -92,6 +110,7 @@ const createSingleAnchorTag = (parkTypeOrLocation) =>{
       e.preventDefault();
       changeInputField(parkTypeOrLocation);
     }
+
     addDropdown.appendChild(a);
 }
 
@@ -101,6 +120,7 @@ const changeInputField = (parkTypeOrLocation) =>{
     input.value = parkTypeOrLocation
     addDropdown.style.display = "none";
     displayCards(parkTypeOrLocation)
+    input.value = "";
 }
 
 
@@ -144,23 +164,24 @@ const displayCards = (parkTypeOrLocation) =>{
     
 
   // if parameter is inside the park type array
+  let modifyParkTypeOrLocation = capitalizeEveryWord(parkTypeOrLocation);
+  
     if( parkTypesArray.includes(parkTypeOrLocation)){
       nationalParksArray.forEach((element) =>{
-        if(element.LocationName.includes(parkTypeOrLocation)){
+        if(element.LocationName.includes(modifyParkTypeOrLocation)){
           createCard(element)
         }
       })
-    } else if(parkTypeOrLocation === "Select All"){
-        nationalParksArray.forEach((element) =>{
+    } else if(locationsArray.includes(modifyParkTypeOrLocation)){
+      nationalParksArray.forEach((element) =>{
+        if(element.State === modifyParkTypeOrLocation){
           createCard(element)
-        })
+        }
+      })
     }
     else{
       nationalParksArray.forEach((element) =>{
-        if(element.State === parkTypeOrLocation){
-    
-          createCard(element)
-        }
+        createCard(element)
       })
     }
 
@@ -168,6 +189,11 @@ const displayCards = (parkTypeOrLocation) =>{
     styleCardsContainer()
   }
   
+  // modify first letter of every word
+  function capitalizeEveryWord(str) {
+    return str.replace(/\b\w/g, (match) => match.toUpperCase());
+  }
+
   
   // style the Container if number of cards display is more than 5
   const styleCardsContainer = () =>{
@@ -222,7 +248,7 @@ const removeDiv = () => {
   let numberOfCards = cardContainer.childElementCount;
   if(numberOfCards > 0){
     const anchorsToRemove = cardContainer.querySelectorAll(".singleCard")
-    console.log(anchorsToRemove)
+    // console.log(anchorsToRemove)
     anchorsToRemove.forEach((anchor) => {
       anchor.remove();
   });

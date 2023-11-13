@@ -199,8 +199,8 @@ const displayCards = (parkTypeOrLocation) =>{
   const styleCardsContainer = () =>{
   let numberOfCards = cardContainer.childElementCount;
   if(numberOfCards > 5){
-    cardContainer.style.overflowY = "scroll";
-    cardContainer.style.border = "1px solid black";
+    // cardContainer.style.overflowY = "scroll";
+    // cardContainer.style.border = "1px solid black";
   } else{
     cardContainer.style.overflowY = "";
     cardContainer.style.border = "none";

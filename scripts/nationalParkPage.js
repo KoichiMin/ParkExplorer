@@ -9,14 +9,23 @@ const mainTitle = document.getElementById("main-title")
 let selectedTypeOption = [];
 
 window.onload = () =>{
-  displayCards("Select All");
-  input.value = "";
+  if(localStorage.hasOwnProperty("state")){
+    let stateValue = localStorage.getItem("state")
+    input.value = stateValue;
+    displayCards(stateValue);
+  }else{
+    displayCards("Select All");
+    input.value = "";
+
+  }
   selectType.onclick = (e) =>{
     e.preventDefault();
     selectedTypeOption = [];
     changeBtnText();
 
   }
+
+
   // filter the dropdown when user types in the inputfield
   input.onkeyup = (e) =>{
     if(e.key === "Enter"){

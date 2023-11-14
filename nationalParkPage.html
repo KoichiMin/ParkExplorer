@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="nationalParkPage.html">Find National Park</a>
+                            <a class="nav-link active" href="nationalParkPage.html" id="navBarNationalPark">Find National Park</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="mountainInfoPage.html">Mountain Info</a>
@@ -40,56 +40,102 @@
     <main>
     <div class=" container  mt-5 ">
         <div class="input-group " >
-            <div class="col-sm-4  col-4 " id="">
-                <input type="text" class="form-control " placeholder="Search anything" id="input">
-                <div id="addDropdown" class=" dropdown-content col-sm-4  col-4"></div>
+            <h4 class="mt-1">
+                Search Type :     
+            </h4>
+            <div class="ms-2">
+                <button type="button" class="btn btn-secondary" id="searchSelectAll">Select All</button>
+                <button type="button" class="btn btn-secondary" id="searchLocation">By Location</button>
+                <button type="button" class="btn btn-secondary" id="searchPark">By Park Type</button>
+
             </div>
-            <div class="col-sm-2 col-4 text-center">
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false" id="selectType">
-                        Select type
+        </div>
+    </div>
+
+    <div class=" container  mt-1 " style="display: none;" id="parkContainer">
+        <div class="input-group " >
+            <h4 class="mt-2">
+                Park Type :     
+            </h4>
+                <div class="ms-2 ">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Park Type
                     </button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item selectedTypeBtn">Select All</li>
-                        <li class="dropdown-item selectedTypeBtn">Location</li>
-                        <li class="dropdown-item selectedTypeBtn">Park</li>
-                    </ul>
+                    
+                    <div class="dropdown-menu dropdown-content dropdownOption" id="dropdownParkType">
+                    
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class=" container  mt-1 " style="display: none;" id="locationContainer">
+        <div class="input-group " >
+            <h4 class="mt-2">
+                Location :     
+            </h4>
+            <div class="ms-2 ">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Location
+                </button>
+                
+                <div class="dropdown-menu dropdown-content dropdownOption" id="dropdownLocation">
+                
                 </div>
             </div>
         </div>
     </div>
+
+    <div class=" container  mt-2 ">
+        <div class="input-group " >
+            <h4 class="mt-1">
+                Filter :     
+            </h4>
+            <div class="ms-2">
+                <input type="text" class="form-control " placeholder="Search anything" id="input">
+                <div id="addDropdown" class=" dropdown-content col-sm-4 col-md-2  col-2"></div>
+
+            </div>
+        </div>
+    </div>
+    
+    
     <h1 class="text-center mt-4" id="main-title">List of National Parks</h1>
     <br >
     <div id="cardContainer" class="card-container mb-2 ms-3 me-3""></div>
-    </main>
+</main>
 
 
-    <!-- <footer class=" bg-dark text-center py-4">
-        <div class="bg-dark">
-            <div class="row text-white">
-                <div class="col-md-6">
-                    <p>&copy; 2023 Park Explorer</p>
-                </div>
-                <div class="col-md-6">
-                    <ul class="list-inline ">
-                        <li class="list-inline-item "><a href="#" class="footer-link text-white">Home</a></li>
-                        <li class="list-inline-item "><a href="#" class="footer-link text-white">About</a></li>
-                        <li class="list-inline-item "><a href="#" class="footer-link text-white">Services</a></li>
-                        <li class="list-inline-item "><a href="#" class="footer-link text-white">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer> -->
 
-    <script src="scripts/nationalParkData.js"></script>
-    <script src="scripts/locationData.js"></script>
-    <script src="scripts/parkTypeData.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+<script src="scripts/nationalParkData.js"></script>
+<script src="scripts/locationData.js"></script>
+<script src="scripts/parkTypeData.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="scripts/nationalParkPage.js"></script>
-</body>
+        <script src="scripts/nationalParkPage.js"></script>
+    </body>
+    
+    </html>
 
-</html>
+
+    <!-- <div class="col-sm-2 col-4 text-center">
+        <div class="btn-group">
+            <button class="btn btn-secondary dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false" id="selectType">
+            Select type
+        </button>
+        <ul class="dropdown-menu">
+            <li class="dropdown-item selectedTypeBtn">Select All</li>
+            <li class="dropdown-item selectedTypeBtn">Location</li>
+            <li class="dropdown-item selectedTypeBtn">Park</li>
+        </ul>
+    </div>
+</div> -->
+
+
+<!-- <div class="container col-sm-6 mt-3 row" id="">
+    
+    <input type="text" class="form-control " placeholder="Search anything" id="input">
+    <div id="addDropdown" class=" dropdown-content col-sm-4  col-4"></div>
+</div> -->

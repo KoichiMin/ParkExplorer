@@ -2,7 +2,7 @@
 
 window.onload = () => {
     displayDropdownSearchBar(locationsArray);
-
+    const navBarNationalPark = document.getElementById("navBarNationalPark");
     input.onkeyup = (e) =>{
         if(e.key === "Enter"){
             changeInputField(input.value);
@@ -12,6 +12,8 @@ window.onload = () => {
             filterFunction();
         }
     }
+
+    navBarNationalPark.onclick = localStorage.removeItem("state");
 
 };
 

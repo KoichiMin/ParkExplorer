@@ -3,32 +3,29 @@
 const selectType = document.getElementById("selectType");
 const addDropdown = document.getElementById("addDropdown");
 const input = document.getElementById("input");
-const mainTitle = document.getElementById("main-title")
+const mainTitle = document.getElementById("main-title");
 
+const searchSelectAll = document.getElementById("searchSelectAll");
+const searchPark = document.getElementById("searchPark");
+const searchLocation = document.getElementById("searchLocation");
+const dropdownOptions = document.querySelectorAll("dropdownOption")
 // find out what user selected between Park or Location
 let selectedTypeOption = [];
 
 window.onload = () =>{
   if(localStorage.hasOwnProperty("state")){
     let stateValue = localStorage.getItem("state")
-    // input.value = stateValue;
-    input.value = "";
+    input.value = stateValue;
+    // input.value = "";
     displayCards(stateValue);
-  }else{
-    displayCards("Select All");
-    input.value = "";
-
-  }
-  selectType.onclick = (e) =>{
-    e.preventDefault();
-    selectedTypeOption = [];
-    changeBtnText();
-
   }
 
+
+  activateBtns()
 
   // filter the dropdown when user types in the inputfield
   input.onkeyup = (e) =>{
+    // console.log(e)
     if(e.key === "Enter"){
       displayCards(input.value)
       addDropdown.style.display = "none";
@@ -38,6 +35,91 @@ window.onload = () =>{
     }
   }
 }
+
+////////////////////////////////////////////////////////////////////////////
+
+// Search Type Buttons
+
+////////////////////////////////////////////////////////////////////////////
+
+
+const parkContainer = document.getElementById("parkContainer");
+const locationContainer = document.getElementById("locationContainer");
+
+// add an onclick function to the search type buttons 
+const activateBtns = () =>{
+
+  searchSelectAll.onclick =() =>{
+    displayCards("Select All");
+    parkContainer.style.display = "none";
+    locationContainer.style.display = "none";
+    input.placeholder = "Search anything";
+    input.value = "";
+    displayDropdownSearchBar(locationsArray.concat(parkTypesArray, "Select All"));
+  } 
+
+  searchPark.onclick = () =>{
+    parkContainer.style.display = "block";
+    locationContainer.style.display = "none";
+    addDropdown.style.display = "none";
+    selectedTypeOption = parkTypesArray;
+    input.value = "";
+    input.placeholder = "Search Parks";
+    displayDropdownSearchBar(parkTypesArray);
+    fillDropdownParkType();
+
+    
+  } 
+  searchLocation.onclick = () =>{
+    locationContainer.style.display = "block";
+    parkContainer.style.display = "none";
+    addDropdown.style.display = "none";
+    input.placeholder = "Search Any State";
+    input.value = "";
+    selectedTypeOption = locationsArray;
+    displayDropdownSearchBar(locationsArray);
+    fillDropdownLocation();
+  } 
+}
+
+// fill dropdown for Location type button
+const fillDropdownLocation = () =>{
+  const dropdownLocation = document.getElementById("dropdownLocation")
+  locationsArray.forEach((option) =>{
+    const a = document.createElement("a");
+    a.className = "dropdown-item selectedType";
+    a.textContent = option;
+    a.onclick = (e) => {
+      e.preventDefault();
+      changeInputField(option);
+    }
+
+    dropdownLocation.appendChild(a);
+  })
+} 
+
+// fill dropdown for Park Type button
+const fillDropdownParkType = () =>{
+  const dropdownParkType = document.getElementById("dropdownParkType")
+  parkTypesArray.forEach((option) =>{
+    const a = document.createElement("a");
+    a.className = "dropdown-item selectedType";
+    a.textContent = option;
+    a.onclick = (e) => {
+      e.preventDefault();
+      changeInputField(option);
+    }
+
+    dropdownParkType.appendChild(a);
+  })
+} 
+
+
+
+
+
+
+
 
 
 
@@ -49,42 +131,6 @@ window.onload = () =>{
 
 
 
-// adjust text inside the select type button
-const changeBtnText = () =>{
-  const dropdownType = document.querySelectorAll(".selectedTypeBtn");
-  dropdownType.forEach((item) =>{
-      clickEventListener(item);
-
-    });
-  }
-
-
-//Event Listener that finds out what the user clicked between Location, Park or Select All and adds dropdown 
-const clickEventListener = (item) =>{
-  item.addEventListener("click", () => {
-    selectType.textContent = item.textContent;
-    if(item.textContent === "Location"){
-      // user selected Location as type
-      addDropdown.style.display = "none";
-      selectedTypeOption = locationsArray;
-      input.placeholder = "Search Any State"
-      displayDropdownSearchBar(locationsArray);
-    } else if(item.textContent === "Select All"){
-        // user selected Select All
-        input.placeholder = "Search anything"
-        displayDropdownSearchBar(locationsArray.concat(parkTypesArray, "Select All"))
-    }
-    else {
-      // user selected Park as type
-      addDropdown.style.display = "none";
-      selectedTypeOption = parkTypesArray;
-      input.placeholder = "Search Parks"
-      displayDropdownSearchBar(parkTypesArray);
-    }
-  });
-}
-
-  
 // remove old anchor tags and create a dropdown for the searchBar
 const displayDropdownSearchBar = (selectedTypeOption) =>{
     
@@ -96,6 +142,7 @@ const displayDropdownSearchBar = (selectedTypeOption) =>{
 // remove all anchor tags from addDropdown div
 const removeAnchorTags = () =>{
   const anchorsToRemove = addDropdown.querySelectorAll("a.selectedType");
+  
   anchorsToRemove.forEach((anchor) => {
       anchor.remove();
   });

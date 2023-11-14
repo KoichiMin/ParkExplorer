@@ -3,8 +3,10 @@
 const dropdownMountain = document.getElementById("dropdownMountain")
 
 window.onload = () =>{
+    const navBarNationalPark = document.getElementById("navBarNationalPark");
     addMountainNameToDropdown();
     displayRandomMountain();
+    navBarNationalPark.onclick = localStorage.removeItem("state");
 }
 
 //  display all mountain name inside Select Mountain dropdown 

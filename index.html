@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Park Explorer</title>
     <link rel="stylesheet" href="css/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -55,17 +55,82 @@
             
         </div>
         <div class="bg-dark">
-            <h1 class="text-white text-center p-2">Find a Park</h1>
+            <h2 class="text-white text-center p-4"><a href="nationalParkPage.html" class="nav-link"> Find a Park</a></h2>
             <div class="input-group d-flex justify-content-center" >
                 <div class="col-sm-4   " id="">
-                    <input type="text" class="form-control inputFocus m-2" placeholder="Search By State" id="input">
+                    <input type="text" class="form-control inputFocus mb-4" placeholder="Search By State" id="input">
                     <div id="addDropdown" class=" dropdown-content col-sm-4  col-4"></div>
                 </div>
                 </div>
             </div>
         </div>
 
+
+        <div id="carouselExample" class="carousel slide m-5 ">
+            <div class="carousel-inner ">
+                <div class="carousel-item active ">
+
+                    <div class="resource-image">
+                        <div class="card" style="width: 25rem;">
+                            <img src="images/allTrails.png" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">All Trails</h5>
+                                <p class="card-text">AllTrails.com is a comprehensive platform for outdoor enthusiasts, providing a vast collection of trail maps and reviews for hiking, biking, and running trails worldwide. Plan your next adventure with detailed information on trail difficulty, length, and user-generated reviews. Explore nature's wonders through an extensive network of trails.</p>
+                                <a href="https://adk.org/" class="btn btn-secondary">Visit Website</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="carousel-item ">
+
+                    <div class="resource-image ">
+                        <div class="card " style="width: 25rem;">
+                            <img src="images/National-Park-Service-Featured-900-1770356493.jpg" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">National Park Service</h5>
+                                <p class="card-text">Explore the beauty of U.S. national parks with the official National Park Service website. Discover diverse landscapes, activities, and plan your visits seamlessly. Access detailed information on parks, monuments, and historic sites to enhance your experience of these natural and cultural wonders.</p>
+                                <a href="https://www.nps.gov/index.htm" class="btn btn-secondary">Visit
+                                    Website</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next " type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
     </main>
+
+    <footer class=" bg-dark text-center py-4">
+        <div class="bg-dark">
+            <div class="row text-white">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Park Explorer</p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline ">
+                        <li class="list-inline-item "><a href="#" class="footer-link text-white">Home</a></li>
+                        <li class="list-inline-item "><a href="#" class="footer-link text-white">About</a></li>
+                        <li class="list-inline-item "><a href="#" class="footer-link text-white">Services</a></li>
+                        <li class="list-inline-item "><a href="#" class="footer-link text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="scripts/locationData.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

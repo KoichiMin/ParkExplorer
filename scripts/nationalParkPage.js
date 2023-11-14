@@ -11,7 +11,8 @@ let selectedTypeOption = [];
 window.onload = () =>{
   if(localStorage.hasOwnProperty("state")){
     let stateValue = localStorage.getItem("state")
-    input.value = stateValue;
+    // input.value = stateValue;
+    input.value = "";
     displayCards(stateValue);
   }else{
     displayCards("Select All");
@@ -221,7 +222,7 @@ const displayCards = (parkTypeOrLocation) =>{
 const createCard = (locationObject) =>{
 
     const container = document.createElement("div");
-    container.classList = "card container p-0 singleCard";
+    container.classList = "card container mb-3 p-0 singleCard";
     
     const cardHeader = document.createElement("div");
     cardHeader.classList = "card-header";
@@ -241,9 +242,10 @@ const createCard = (locationObject) =>{
 
     if("Visit" in locationObject){
       const anchorBtn = document.createElement("a");
-      anchorBtn.classList = "btn btn-primary col-2";
+      anchorBtn.classList = "btn btn-secondary col-2";
       anchorBtn.textContent = "Visit";
       anchorBtn.href = locationObject.Visit;
+      anchorBtn.target = "_blank";
       cardBody.appendChild(anchorBtn);
     }
 

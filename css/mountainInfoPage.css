@@ -1,3 +1,23 @@
+@media (max-width: 767px) {
+    .time-image{
+        height: 60px;
+        width: 60px;
+        
+    }
+    .time-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+    }
+    .images-box{
+        display: flex;
+        width: 400px;
+    }
+}
+
+
 .mountain-container{
     max-height: 100%;
     min-height: 93vh;
@@ -13,14 +33,3 @@
 
 }
 
-.mountain-image{
-    /* max-height:10vh;
-    min-height: 10vh; */
-    /* min-width: 30vw;
-    max-width: 30vw; */
-
-}
-
-/* .sunrise-img{
-    width: 100px;
-} */

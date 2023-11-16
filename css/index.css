@@ -2,6 +2,10 @@ body{
     overflow-x: hidden;
 }
 
+nav{
+    z-index: 1000;
+}
+
 @media (max-width: 900px) {
     .hero-image {
         height: 400px; 
@@ -78,4 +82,19 @@ body{
     align-items: center;
     gap: 10px;
 
+}
+
+
+/* Set the size of the div element that contains the map */
+#map {
+    height: 400px; /* The height is 400 pixels */
+    width: 80%; /* The width is the width of the web page */
+
+
+}
+
+.map-container{
+    display: flex;
+    justify-content: center;
+    
 }

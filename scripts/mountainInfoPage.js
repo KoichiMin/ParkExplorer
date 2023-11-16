@@ -64,3 +64,6 @@ const selectedMountain = async (mountain) =>{
 }
 
 
+
+
+

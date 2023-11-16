@@ -266,7 +266,12 @@ const createCard = (locationObject) =>{
 
     const container = document.createElement("div");
     container.classList = "card container mb-3 p-0 singleCard";
-    
+    container.onclick = () =>{
+      localStorage.setItem("longitude", locationObject.Longitude);
+      localStorage.setItem("latitude", locationObject.Latitude);
+      window.location.href = "index.html";
+    }
+
     const cardHeader = document.createElement("div");
     cardHeader.classList = "card-header";
     cardHeader.innerText = locationObject.LocationID.toUpperCase();
@@ -285,7 +290,7 @@ const createCard = (locationObject) =>{
 
     if("Visit" in locationObject){
       const anchorBtn = document.createElement("a");
-      anchorBtn.classList = "btn btn-secondary col-2";
+      anchorBtn.classList = "btn btn-secondary col-3";
       anchorBtn.textContent = "Visit";
       anchorBtn.href = locationObject.Visit;
       anchorBtn.target = "_blank";

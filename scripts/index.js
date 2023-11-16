@@ -1,6 +1,7 @@
 "use strict";
 
 window.onload = () => {
+    initMap();
     displayDropdownSearchBar(locationsArray);
     const navBarNationalPark = document.getElementById("navBarNationalPark");
     input.onkeyup = (e) =>{
@@ -67,3 +68,33 @@ const filterFunction = () => {
     }
     }
 };
+
+
+// Initialize and add the map
+let map;
+
+async function initMap() {
+  // The location that user selects in NationalPark page
+    const position = { lat: Number(localStorage.getItem("latitude")), lng: Number(localStorage.getItem("longitude")) };
+    
+  // Request needed libraries.
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+  // The map, centered at selected Park
+    map = new Map(document.getElementById("map"), {
+        zoom: 8,
+        center: position,
+        mapId: "DEMO_MAP_ID",
+    });
+
+  // The marker, positioned at selected Park
+    const marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Uluru",
+    });
+}
+
+
+

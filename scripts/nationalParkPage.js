@@ -12,12 +12,14 @@ const dropdownOptions = document.querySelectorAll("dropdownOption")
 // find out what user selected between Park or Location
 let selectedTypeOption = [];
 
+
+
 window.onload = () =>{
   if(localStorage.hasOwnProperty("state")){
-    let stateValue = localStorage.getItem("state")
-    input.value = stateValue;
-    // input.value = "";
+    let stateValue = localStorage.getItem("state");
+    let capitalizeFirstLetterValue = stateValue[0].toUpperCase() + stateValue.slice(1)
     displayCards(stateValue);
+    mainTitle.textContent = capitalizeFirstLetterValue
   }
 
 
@@ -25,11 +27,13 @@ window.onload = () =>{
 
   // filter the dropdown when user types in the inputfield
   input.onkeyup = (e) =>{
-    // console.log(e)
     if(e.key === "Enter"){
-      displayCards(input.value)
+      const capitalizedInput =  capitalizeEveryWord(input.value);
+      mainTitle.textContent = capitalizedInput
+      displayCards(capitalizedInput)
       addDropdown.style.display = "none";
       input.value = "";
+      
     } else{
       filterFunction();
     }
@@ -56,6 +60,7 @@ const activateBtns = () =>{
     input.placeholder = "Search anything";
     input.value = "";
     displayDropdownSearchBar(locationsArray.concat(parkTypesArray, "Select All"));
+    mainTitle.textContent = "List of National Parks";
   } 
 
   searchPark.onclick = () =>{
@@ -174,6 +179,7 @@ const changeInputField = (parkTypeOrLocation) =>{
     addDropdown.style.display = "none";
     displayCards(parkTypeOrLocation)
     input.value = "";
+    mainTitle.textContent = parkTypeOrLocation
 }
 
 
@@ -218,14 +224,15 @@ const displayCards = (parkTypeOrLocation) =>{
 
   // if parameter is inside the park type array
   let modifyParkTypeOrLocation = capitalizeEveryWord(parkTypeOrLocation);
-  
     if( parkTypesArray.includes(parkTypeOrLocation)){
       nationalParksArray.forEach((element) =>{
         if(element.LocationName.includes(modifyParkTypeOrLocation)){
           createCard(element)
         }
       })
-    } else if(locationsArray.includes(modifyParkTypeOrLocation)){
+    } 
+    // 
+    else if(locationsArray.includes(modifyParkTypeOrLocation)){
       nationalParksArray.forEach((element) =>{
         if(element.State === modifyParkTypeOrLocation){
           createCard(element)
@@ -233,6 +240,7 @@ const displayCards = (parkTypeOrLocation) =>{
       })
     }
     else{
+      mainTitle.textContent = "List of National Parks";
       nationalParksArray.forEach((element) =>{
         createCard(element)
       })
@@ -241,7 +249,8 @@ const displayCards = (parkTypeOrLocation) =>{
     // style Container if needed
     styleCardsContainer()
   }
-  
+
+
   // modify first letter of every word
   function capitalizeEveryWord(str) {
     return str.replace(/\b\w/g, (match) => match.toUpperCase());
@@ -307,7 +316,6 @@ const removeDiv = () => {
   let numberOfCards = cardContainer.childElementCount;
   if(numberOfCards > 0){
     const anchorsToRemove = cardContainer.querySelectorAll(".singleCard")
-    // console.log(anchorsToRemove)
     anchorsToRemove.forEach((anchor) => {
       anchor.remove();
   });

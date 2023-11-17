@@ -1,5 +1,16 @@
+
 body{
     overflow-x: hidden;
+    
+    max-height: 100vh;
+display: flex;
+flex-direction: column;
+background-size: cover;
+background-attachment: fixed;
+background-repeat: no-repeat;
+background-image: url("../images/mesmerizing-view-lake-with-reflection-fir-trees-mountains-cloudy-sky.jpg");
+margin: 0;
+
 }
 
 
@@ -21,16 +32,17 @@ body{
     background-color: #ddd;
 }
 
-.card-container {
-    max-height: 700px; 
-    min-height: 630px; 
-    /* border: 1px solid black; */
-}
+
 
 .singleCard:hover {
-    /* background-color: red; */
+    
     opacity: 0.7;
     cursor: pointer;
     }
 
+
+    footer {
+        margin-top: auto;
+    
+    }
 

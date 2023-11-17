@@ -59,7 +59,7 @@ const filterFunction = () => {
     addDropdown.style.display = "block";
 
     const a = addDropdown.getElementsByTagName("a");
-    for (let i = 0; i < a.length; i++) {
+    for (let i in a) {
     let txtValue = a[i].textContent;
     if (txtValue.toUpperCase().indexOf(input.value.toUpperCase()) > -1) {
         a[i].style.display = "";

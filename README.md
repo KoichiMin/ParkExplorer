@@ -6,16 +6,16 @@ Discover the wonders of US national parks and conquer 48 iconic mountains with P
 # Website Images
 
 ### Home Page
-![Home Page](/images/Screenshot%2023-11-17%at%14.35.35.png)
+![Home Page](/images/githubImage1.png)
 
-![Home Page](/images/Screenshot%2023-11-17%at%14.36.24.png)
+![Home Page](/images/githubImage2.png)
 
 ***
 ### National Park Page
-![National Park Page](/images/Screenshot%2023-11-17%at%14.37.29.png)
+![National Park Page](/images/githubImage3.png)
 ***
 ### Moutain Info Page
-![Moutain Info Page](/images/Screenshot%2023-11-17%at%14.37.47.png)
+![Moutain Info Page](/images/githubImage4.png)
 ***
 
 # Interesting Piece of Code

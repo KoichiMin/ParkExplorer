@@ -9,12 +9,12 @@ const searchSelectAll = document.getElementById("searchSelectAll");
 const searchPark = document.getElementById("searchPark");
 const searchLocation = document.getElementById("searchLocation");
 const dropdownOptions = document.querySelectorAll("dropdownOption")
-// find out what user selected between Park or Location
-let selectedTypeOption = [];
+
 
 
 
 window.onload = () =>{
+  // find out if user wrote inside the search bar in the index page by checking "state" in localStorage
   if(localStorage.hasOwnProperty("state")){
     let stateValue = localStorage.getItem("state");
     let capitalizeFirstLetterValue = stateValue[0].toUpperCase() + stateValue.slice(1)
@@ -22,7 +22,7 @@ window.onload = () =>{
     mainTitle.textContent = capitalizeFirstLetterValue
   }
 
-
+  // add an onclick method to the Select Type buttons 
   activateBtns()
 
   // filter the dropdown when user types in the inputfield
@@ -53,6 +53,7 @@ const locationContainer = document.getElementById("locationContainer");
 // add an onclick function to the search type buttons 
 const activateBtns = () =>{
 
+  // Select All button
   searchSelectAll.onclick =() =>{
     displayCards("Select All");
     parkContainer.style.display = "none";
@@ -62,26 +63,24 @@ const activateBtns = () =>{
     displayDropdownSearchBar(locationsArray.concat(parkTypesArray, "Select All"));
     mainTitle.textContent = "List of National Parks";
   } 
-
+  // Park Type button
   searchPark.onclick = () =>{
     parkContainer.style.display = "block";
     locationContainer.style.display = "none";
     addDropdown.style.display = "none";
-    selectedTypeOption = parkTypesArray;
     input.value = "";
     input.placeholder = "Search Parks";
     displayDropdownSearchBar(parkTypesArray);
     fillDropdownParkType();
-
-    
   } 
+
+  // Location button
   searchLocation.onclick = () =>{
     locationContainer.style.display = "block";
     parkContainer.style.display = "none";
     addDropdown.style.display = "none";
     input.placeholder = "Search Any State";
     input.value = "";
-    selectedTypeOption = locationsArray;
     displayDropdownSearchBar(locationsArray);
     fillDropdownLocation();
   } 
@@ -134,9 +133,9 @@ const fillDropdownParkType = () =>{
 
 // remove old anchor tags and create a dropdown for the searchBar
 const displayDropdownSearchBar = (selectedTypeOption) =>{
-    
     removeAnchorTags();
     createAllAnchorTags(selectedTypeOption);
+
 }
 
 
@@ -231,7 +230,8 @@ const displayCards = (parkTypeOrLocation) =>{
         }
       })
     } 
-    // 
+
+    // if parameter is inside location array 
     else if(locationsArray.includes(modifyParkTypeOrLocation)){
       nationalParksArray.forEach((element) =>{
         if(element.State === modifyParkTypeOrLocation){
@@ -239,6 +239,8 @@ const displayCards = (parkTypeOrLocation) =>{
         }
       })
     }
+
+    // if parameter is Select All or word not inside both arrays  
     else{
       mainTitle.textContent = "List of National Parks";
       nationalParksArray.forEach((element) =>{
@@ -246,8 +248,7 @@ const displayCards = (parkTypeOrLocation) =>{
       })
     }
 
-    // style Container if needed
-    styleCardsContainer()
+
   }
 
 
@@ -257,17 +258,6 @@ const displayCards = (parkTypeOrLocation) =>{
   }
 
   
-  // style the Container if number of cards display is more than 5
-  const styleCardsContainer = () =>{
-  let numberOfCards = cardContainer.childElementCount;
-  if(numberOfCards > 5){
-    // cardContainer.style.overflowY = "scroll";
-    // cardContainer.style.border = "1px solid black";
-  } else{
-    cardContainer.style.overflowY = "";
-    cardContainer.style.border = "none";
-  }
-}
 
 
 // create a single anchor tag
@@ -286,17 +276,21 @@ const createCard = (locationObject) =>{
     cardHeader.innerText = locationObject.LocationID.toUpperCase();
     container.appendChild(cardHeader)
 
+
     const cardBody = document.createElement("div");
     cardBody.classList = "card-body row";
+
 
     const cardTitle = document.createElement("h5");
     cardTitle.innerText = locationObject.LocationName;
     cardBody.appendChild(cardTitle);
 
+
     const cardText = document.createElement("card-text");
     cardText.innerText = `${locationObject.Address}, ${locationObject.City}, ${locationObject.State}`;
     cardBody.appendChild(cardText);
 
+    // if object has a website 
     if("Visit" in locationObject){
       const anchorBtn = document.createElement("a");
       anchorBtn.classList = "btn btn-secondary col-3";

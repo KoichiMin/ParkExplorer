@@ -2,9 +2,15 @@ body{
     overflow-x: hidden;
 }
 
+*{
+    font-family: 'Raleway', sans-serif;
+}
+
 nav{
     z-index: 1000;
+
 }
+
 
 @media (max-width: 900px) {
     .hero-image {
@@ -41,6 +47,7 @@ nav{
     opacity: 0.9;
     object-fit: cover;  
     border-radius: none;
+    
 
 }
 #input:focus {
